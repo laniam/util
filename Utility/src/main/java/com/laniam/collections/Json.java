@@ -1,22 +1,19 @@
 /**
  * 
  */
-package com.laniam.dataTypes;
+package com.laniam.collections;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonGenerationException;
 import org.codehaus.jackson.JsonParseException;
-import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 
 import com.laniam.util.HelperMethods;
-import com.laniam.util.Validate;
+import com.laniam.util.ValidationFactory;
 
 /**
  * @author ardhani
@@ -29,7 +26,7 @@ public class Json {
 
 	public Json(String jsonString) throws JsonParseException, IOException {
 		ObjectMapper objectMapper = new ObjectMapper();
-		if (Validate.isValidJson(jsonString)) {
+		if (ValidationFactory.isValidJson(jsonString)) {
 			this.jsonString = jsonString;
 			this.jsonMap = objectMapper.readValue(jsonString, Map.class);
 		}
@@ -54,7 +51,7 @@ public class Json {
 	}
 
 	public boolean isValidJson() {
-		return Validate.isValidJson(jsonString);
+		return ValidationFactory.isValidJson(jsonString);
 	}
 
 	public <T> T get(String key) {
@@ -65,7 +62,7 @@ public class Json {
 		for (String key_ : keysList) {
 			if (jsonMap_.containsKey(key_)) {
 				Object temp = jsonMap_.get(key_);
-				if (Validate.isLastIndexOfList(keysList, key_)) {
+				if (ValidationFactory.isLastIndexOfList(keysList, key_)) {
 					returnValue = (T) temp;
 				} else if (temp instanceof Map) {
 					jsonMap_ = (Map<String, ?>) temp;
