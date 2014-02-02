@@ -17,6 +17,7 @@ import org.codehaus.jackson.map.ObjectMapper;
  */
 public class HelperMethods {
 
+	@SuppressWarnings("unchecked")
 	public static <T, E> String formJsonString(T keys, E values) {
 		String returnJsonString = Constants.EMPTYSTRING;
 		List<String> keysList = null;
@@ -48,15 +49,15 @@ public class HelperMethods {
 		}
 	}
 
-	public static  Map<String, Object> formJsonMap(List<String> keys,
+	public static Map<String, Object> formJsonMap(List<String> keys,
 			List<Object> values) {
 		Map<String, Object> jsonMap = new HashMap<String, Object>();
-		if(keys.size() == values.size()){
-			for(int i=0;i<keys.size();i++){
+		if (keys.size() == values.size()) {
+			for (int i = 0; i < keys.size(); i++) {
 				jsonMap.put(keys.get(i), values.get(i));
 			}
-		}else if(values.size()==1){
-			for(int i=0;i<keys.size();i++){
+		} else if (values.size() == 1) {
+			for (int i = 0; i < keys.size(); i++) {
 				jsonMap.put(keys.get(i), values.get(0));
 			}
 		}
